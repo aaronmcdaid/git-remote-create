@@ -21,9 +21,10 @@ path_to_repo="$(echo "$without_proto" | cut -d/ -f2- | tr -d '\n')"
 # echo "=$path_to_repo="
 
 echo "Logging into server: $server ..."
-{ printf '%q' "$path_to_repo"; echo; } | ssh "$server" 'read -r path_to_repo && echo Creating Directory ... && the_path=$(eval echo ${path_to_repo}) && { test ! -d "$the_path" || { echo Already Exists! Exiting.; false; } } && mkdir -p "$the_path" && cd "$the_path" && git init && echo Created.'
+{ printf '%q' "$path_to_repo"; echo; echo "$@"; } | ssh "$server" '{ read -r path_to_repo; read -r options_to_init; } && echo Creating Directory ... && the_path=$(eval echo ${path_to_repo}) && { test ! -d "$the_path" || { echo Already Exists! Exiting.; false; } } && mkdir -p "$the_path" && cd "$the_path" && git init $options_to_init && echo Created.'
 if [[ 0 -ne "$?" ]]; then
 	exit 1
 fi
 
-echo git remote add "$repo_name" "$url" "$@"
+echo "Adding locally, and fetching ..."
+exec git remote add -f "$repo_name" "$url"
