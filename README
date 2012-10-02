@@ -1,17 +1,20 @@
 
 	git-remote-create
 
-git-remote-create will log into a remote server and create a bare git
-repository.  If successful, it will then run 'git remote add' locally.
+git-remote-create will log into a remote server and create a git repository.
+If successful, it will then run 'git remote add' locally.
 
 This is convenient if you create many git repositories, as it automates the
 tedious process of logging into the remote machine and creating the repository
 and copying the relevant file path.
 
-Usage:   git-remote-create repo_name ssh://server/~user/path/project_name.git
+   Usage:   git-remote-create repo_name ssh://server/~user/path/project_name.git [options-to-git-init]
 
-The arguments are exactly the same arguments as are passed to 'git remote add'.
+The first two arguments are exactly the same arguments as are passed to 'git remote add'.
+The [options-to-init] are passed to git init.  You will probably almost always want a
+bare repository at the remote location, so you should do:
 
+   git-remote-create repo_name ssh://server/~user/path/project_name.git --bare
 
 Author and copyright: Aaron McDaid aaronmcdaid@gmail.com
 
