@@ -1,8 +1,7 @@
 
 	git-remote-create
 
-git-remote-create will use ssh to log into a remote server and create a git repository.
-If successful, it will then run 'git remote add' locally.
+git-remote-create will use ssh to log into a remote server and create a git repository.  If successful, it will then run 'git remote add' locally.
 
 This is convenient if you create many git repositories, as it automates the
 tedious process of logging into the remote machine and creating the repository
@@ -10,19 +9,15 @@ and copying the relevant file path.
 
    Usage:   git-remote-create repo_name server '~user/path/project_name.git' [options-to-git-init]
 
-The first two arguments are exactly the same arguments as are passed to 'git remote add'.
-The [options-to-init] are passed to git init.  You will probably almost always want a
-bare repository at the remote location, so you should do:
+The first two arguments are similar to the arguments that are passed to 'git remote add'.
+The [options-to-init] are passed to git init.  You will probably want a bare repository at the remote location, so you should do:
 
    git-remote-create repo_name server '~user/path/project_name.git' --bare
 
 I recommend that you use the quotes as I have done here, as you probably want
 the username expansion to be done using the usernames on the server side.
-To create it in your 'own' homedir, use
 
-   git-remote-create repo_name server '~/path/project_name.git' --bare
-
-To give a full absolute path:
+To give a full absolute path on the serverside:
 
    git-remote-create repo_name server '/path/project_name.git' --bare
 
