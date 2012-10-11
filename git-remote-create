@@ -11,6 +11,11 @@ shift
 shift
 shift # Three shifts so that the remaining args can be passed to git-init
 
+if [[ / != "${path_to_repo:0:1}" && '~' != "${path_to_repo:0:1}" ]]; then
+	echo "Error: The first character of the path should be either a / or a ~"
+	exit 1
+fi
+
 # echo "=$server="
 # echo "=$path_to_repo="
 
